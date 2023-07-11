@@ -24,13 +24,13 @@ def upgrade() -> None:
                     sa.PrimaryKeyConstraint('id')
                     )
 
-    op.create_table('referrals',
-                    sa.Column('id', sa.SmallInteger(), nullable=False),
-                    sa.Column('user_id', sa.BigInteger(), nullable=False),
-                    sa.Column('referral_id', sa.BigInteger(), nullable=False),
-                    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ondelete='NO ACTION'),
-                    sa.PrimaryKeyConstraint('id')
-                    )
+    # op.create_table('referrals',
+    #                 sa.Column('id', sa.SmallInteger(), nullable=False),
+    #                 sa.Column('user_id', sa.BigInteger(), nullable=False),
+    #                 sa.Column('referral_id', sa.BigInteger(), nullable=False),
+    #                 sa.ForeignKeyConstraint(['user_id'], ['user.id'], ondelete='NO ACTION'),
+    #                 sa.PrimaryKeyConstraint('id')
+    #                 )
 
     op.create_table('users',
                     sa.Column('id', sa.BigInteger(), nullable=False),
@@ -41,8 +41,6 @@ def upgrade() -> None:
                     sa.ForeignKeyConstraint(['subscription_id'], ['subscriptions.id'], ondelete='NO ACTION'),
                     sa.PrimaryKeyConstraint('id')
                     )
-
-
 
 
 def downgrade() -> None:
