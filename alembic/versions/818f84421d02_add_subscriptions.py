@@ -33,8 +33,8 @@ subscriptions = ['Стандарт',
 @create_sync_session
 def upgrade(session: Session = None) -> None:
     for subscription in subscriptions:
-        subscription = Subscription(name=subscription, price=0)
-        session.add(subscription)
+        subscription1 = Subscription(name=subscription, price=0)
+        session.add(subscription1)
         try:
             session.commit()
         except IntegrityError:
