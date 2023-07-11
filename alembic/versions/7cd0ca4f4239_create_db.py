@@ -37,7 +37,7 @@ def upgrade() -> None:
                     sa.Column('id', sa.SmallInteger(), nullable=False),
                     sa.Column('user_id', sa.BigInteger(), nullable=False),
                     sa.Column('referral_id', sa.BigInteger(), nullable=False),
-                    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ondelete='NO ACTION'),
+                    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='NO ACTION'),
                     sa.PrimaryKeyConstraint('id')
                     )
 
