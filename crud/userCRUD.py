@@ -1,3 +1,5 @@
+import logging
+
 from sqlalchemy import select, delete, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -15,7 +17,7 @@ class CRUDUser(object):
         try:
             await session.commit()
         except IntegrityError as eq:
-            print(eq)
+            logging.error(f'Error add user in db: {eq}')
         else:
             await session.refresh(user)
             return UserInDBSchema(**user.__dict__)
