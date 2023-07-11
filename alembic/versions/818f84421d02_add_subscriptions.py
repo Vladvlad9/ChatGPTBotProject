@@ -33,7 +33,7 @@ subscriptions = ['Стандарт',
 @create_sync_session
 def upgrade(session: Session = None) -> None:
     for subscription in subscriptions:
-        subscription = Subscription(name=subscription)
+        subscription = Subscription(name=subscription, price=0)
         session.add(subscription)
         try:
             session.commit()
