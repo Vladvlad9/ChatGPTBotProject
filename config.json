@@ -1,0 +1,21 @@
+{
+  "BOT": {
+    "TOKEN": "6350484498:AAGI7Z_G3WHCjEpiYGz7UrVoWPOcizxJ6xI",
+    "ADMINS": [381252111]
+  },
+  "CHANNEL": {
+    "CHANNEL_ID": "-1001928761468",
+    "CHANNEL_NAME": "https://t.me/mychannelforbottest"
+
+  },
+  "OpenAI": {
+    "KEY": ""
+  },
+  "HELP": {
+    "TechnicalSupport": "https://t.me/ulad_islau",
+    "AdvertisingOtherIssues": "https://t.me/ulad_islau"
+
+  },
+  "DATABASE": "postgres:postgres@localhost:5432/chat_bot_gpt"
+
+}
