@@ -57,10 +57,10 @@ class CRUDUser(object):
 
     @staticmethod
     @create_async_session
-    async def update(user_id: UserInDBSchema, session: AsyncSession = None) -> None:
+    async def update(user: UserInDBSchema, session: AsyncSession = None) -> None:
         await session.execute(
             update(User)
-            .where(User.id == user_id.id)
-            .values(**user_id.dict())
+            .where(User.id == user.id)
+            .values(**user.dict())
         )
         await session.commit()

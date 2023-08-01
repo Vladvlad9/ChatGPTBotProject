@@ -1,18 +1,24 @@
 import logging
+import time
 
+import openai as openai
 from aiogram.dispatcher import FSMContext
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, Message
 from aiogram.utils.callback_data import CallbackData
+from aiogram.utils.exceptions import BadRequest
 
 from config import CONFIG
 from crud import CRUDUser, CRUDSubscription
 from crud.referralCRUD import CRUDReferral
 from handlers.users.base_text import BaseText
 from loader import bot
+from message_templates import message_templates
 from schemas import UserSchema, ReferralSchema
-
+from states.users.userStates import UserStates
 main_cb = CallbackData("main", "target", "action", "id", "editId")
 
+messages = {}
+openai.api_key = CONFIG.OpenAI.KEY
 
 class MainForms:
     @staticmethod
@@ -165,8 +171,10 @@ class MainForms:
                                                              reply_markup=await MainForms.sub_channel_ikb())
 
                 elif data.get('target') == "myProfile":
+
                     if data.get('action') == "getProfile":
-                        text = "💬 Доступно запросов для ChatGPT: 3\n\n" \
+                        user = await CRUDUser.get(user_id=callback.from_user.id)
+                        text = f"💬 Доступно запросов для ChatGPT: {user.queries_chat_gpt}\n\n" \
                                "Зачем запросы ChatGPT?\n\n" \
                                "Задавая вопросы - ты тратишь 1 запрос. " \
                                "Бесплатно можно тратить 3 запроса каждый день. " \
@@ -217,6 +225,8 @@ class MainForms:
 
                             await callback.message.edit_text(text=text,
                                                              reply_markup=await MainForms.getDialog_ikb())
+
+                            await UserStates.Query.set()
 
                     elif data.get('action') == "SubscriptionGPT":
                         try:
